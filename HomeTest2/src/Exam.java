@@ -5,6 +5,7 @@ public class Exam {
     private int mark;
     private LocalDate dateOfExam;
     private String examName;
+    private String lode;
 
     public Exam(String n, int m, LocalDate d){  //Standard constructor
         examName = n;
@@ -18,6 +19,7 @@ public class Exam {
         dateOfExam = LocalDate.of(year,month,day);
     }
 
+
     public Exam(){   //Empty case constructor
         this("NA",0,2000,1,1);
     }
@@ -29,6 +31,14 @@ public class Exam {
         LocalDate parsedDate = LocalDate.parse(date, formatter);
         dateOfExam = parsedDate;
     }
+
+
+    public static void rename(Exam e, String newName){  //method to rename exam
+        e.examName = newName;
+    }
+
+
+
 
     @Override
     public String toString() {
@@ -46,6 +56,8 @@ public class Exam {
         System.out.println(exam1);
         System.out.println(exam2);
         System.out.println(exam3);
+
+
     }
 
 
@@ -54,6 +66,7 @@ public class Exam {
     public int getMark() {
         return mark;
     }
+
 
     public void setMark(int mark) {
         this.mark = mark;

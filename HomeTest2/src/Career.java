@@ -15,6 +15,7 @@ public class Career {
 
     public void newExam(Exam e){
         if(numExams < MAX_EXAMS){
+
             studentExams[numExams] = e;
             numExams++;
         }
@@ -34,6 +35,16 @@ public class Career {
             mean = mean / numExams;
         }
     }
+
+
+    public static void delete(Exam e, Exam[] studentExams){ //method to delete an exam from student's career
+       for(int i=0; i<MAX_EXAMS; i++){
+           if(e.getExamName().equals(studentExams[i].getExamName())){
+                studentExams[i+1] = studentExams[i];
+           }
+       }
+    }
+
 
     @Override
     public String toString() {

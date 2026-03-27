@@ -20,6 +20,9 @@ public class Student {
 
     }
 
+
+
+
     @Override
     public String toString() {
         return "Student{" +
@@ -33,12 +36,13 @@ public class Student {
     public static void main(String[] args) {
         Exam exam1 = new Exam("Math", 17, 2026, 03, 12);
         Exam exam2 = new Exam("CP1", 22, "22-03-2026");
-        Exam exam3 = new Exam();
 
 
         Student s01 = new Student("Alice", "Wong", 224455);
         s01.getStudentCareer().newExam(exam1);
         s01.getStudentCareer().newExam(exam2);
+        Exam.rename(exam1, "Test rename");
+        Career.delete(exam1, s01);
         System.out.println(s01);
     }
 

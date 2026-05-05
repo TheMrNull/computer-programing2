@@ -34,6 +34,6 @@ public class BikeStore {
         System.out.println(mySales);
 
         mySales.sortTotalDescending();
-        System.out.println(mySales);
+        System.out.println(mySales) ;
     }
 }

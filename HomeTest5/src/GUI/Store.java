@@ -19,19 +19,25 @@ public class Store extends Application {
 
     ReadFile file;
     BorderPane bp01;
-    Button btn01, btn02,btn03;
+    Button btn01, btn02,btn03,btn04,btn05,btn06;
     TabPane tabPane01;
     HBox hbox01;
     Tab tab01, tab02;
-    TextArea ta01;
+    TextArea ta01,ta02;
+    TextField tf01;
     Stage mainStage;
     @Override
     public void start(Stage primaryStage) {
         mainStage = primaryStage;
 
+        // Text fields
+        tf01 = new TextField();
+
         //Text areas
         ta01 = new TextArea();
         ta01.setEditable(false);
+        ta02 = new TextArea();
+        ta02.setEditable(false);
 
         //Buttons
         btn01 = new Button("Load file");
@@ -40,8 +46,14 @@ public class Store extends Application {
         btn02.setOnAction(e->btn02ClearAll());
         btn03 = new Button("Exit");
         btn03.setOnAction(e->btn03Exit());
+        btn04 = new Button("Buy");
+        btn04.setOnAction(e->btn04Buy());
+        btn05 = new Button("Sort price");
+        btn05.setOnAction(e->btn05SortPrice());
+        btn06 = new Button("Sort wheel size");
+        btn06.setOnAction(e->btn06sortWheelSize());
         //Boxes
-        hbox01 = new HBox(10, btn01,btn02,btn03);
+        hbox01 = new HBox(10, btn01,btn02,btn05,btn06,tf01,btn04,btn03);
 
         //Tabs
         tab01 = new Tab("Bike list");
@@ -49,12 +61,14 @@ public class Store extends Application {
         tab01.setContent(ta01);
         tab02 = new Tab("Sales");
         tab02.setClosable(false);
+        tab02.setContent(ta02);
         //Panes
         tabPane01 = new TabPane();
         bp01 = new BorderPane();
         bp01.setCenter(tabPane01);
         bp01.setBottom(hbox01);
         tabPane01.getTabs().addAll(tab01,tab02);
+
 
         //Scene
         Scene scene01 = new Scene(bp01, 850,600);
@@ -63,6 +77,23 @@ public class Store extends Application {
         primaryStage.setTitle("Bike Store");
         primaryStage.show();
 
+    }
+
+    private void btn06sortWheelSize() {
+        file.compareWheelSize();
+        ta01.clear();
+        ta01.appendText(file.toString());
+    }
+
+    private void btn05SortPrice() {
+        file.comparePrice();
+        ta01.clear();
+        ta01.appendText(file.toString());
+    }
+
+    private void btn04Buy() {
+        ta02.appendText(tf01.getText()+"\n");
+        tf01.clear();
     }
 
     private void btn03Exit() {

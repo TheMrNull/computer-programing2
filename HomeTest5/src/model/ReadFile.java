@@ -18,10 +18,6 @@ public class ReadFile {
 
         System.out.println("\nIteration through the list with Efor");
         System.out.println(r);
-
-
-
-
     }
 
     List<Bike> catalog;
@@ -38,6 +34,26 @@ public class ReadFile {
         catalog = new ArrayList<Bike>();
     }
 
+
+    public void comparePrice(){
+        Collections.sort(catalog, new Comparator<Bike>() {
+            @Override
+            public int compare(Bike o1, Bike o2) {
+                return Double.compare(o1.getCost(), o2.getCost());
+            }
+        });
+    }
+
+
+    public void compareWheelSize(){
+        Collections.sort(catalog, new Comparator<Bike>() {
+            @Override
+            public int compare(Bike o1, Bike o2) {
+                return Double.compare(o1.getWheelSize(), o2.getWheelSize());
+            }
+        });
+    }
+
     @Override
     public String toString() {
         String s="";
@@ -46,11 +62,6 @@ public class ReadFile {
         }
         return s;
     }
-
-
-
-
-
 
 
     private void read(List <Bike> cat, String csvFilePath) throws Exception {

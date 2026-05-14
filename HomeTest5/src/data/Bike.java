@@ -77,7 +77,7 @@ public class Bike implements Comparable<Bike>{
         this.manufacturer = "NA";
     }
 
-    public Bike(double c, bikeType t, double ws, String m, String manu){
+    public Bike(double c, bikeType t, double ws, String m, String manu){ //Constructor for bikes with data
         this.cost = c;
         this.type = t;
         this.wheelSize = ws;
@@ -88,12 +88,31 @@ public class Bike implements Comparable<Bike>{
             this.cost = c;
             this.type = bikeType.UNKNOWN;
             this.wheelSize = ws;
-            this.model = "shoud not be here";
+            this.model = "should not be here";
             this.manufacturer = "Should not be here";
+        }
+    }
+
+
+    @Override
+    public String toString() {
+        return String.format("Manufacturer: %15s Model: %10s BikeType: %10s Cost: %8.2f  WheelSize: %4.2f",
+        this.getManufacturer(), this.getModel(), this.type, this.getCost(), this.getWheelSize());
+    }
+
+
+    static void main(String[] args) {
+        Bike [] catalog = {
+                new Bike(),
+                new Bike(1500, bikeType.ROAD, 29, "dragon", "Coppi"),
+                //new Bike(2000, bikeType.EBIKE, 29, "lizard", "Tesla")
+        };
+
+        for(Bike b : catalog){
+            System.out.println(b);
         }
 
     }
-
 
 
 }

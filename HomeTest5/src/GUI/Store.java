@@ -1,14 +1,18 @@
 package GUI;
 
+import data.Bike;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import model.ReadFile;
+import data.Sale;
 
 import java.io.File;
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 public class Store extends Application {
@@ -21,7 +25,8 @@ public class Store extends Application {
     BorderPane bp01;
     Button btn01, btn02,btn03,btn04,btn05,btn06;
     TabPane tabPane01;
-    HBox hbox01;
+    HBox hbox01, hbox02;
+    VBox vbox01;
     Tab tab01, tab02;
     TextArea ta01,ta02;
     TextField tf01;
@@ -53,8 +58,9 @@ public class Store extends Application {
         btn06 = new Button("Sort wheel size");
         btn06.setOnAction(e->btn06sortWheelSize());
         //Boxes
-        hbox01 = new HBox(10, btn01,btn02,btn05,btn06,tf01,btn04,btn03);
-
+        hbox01 = new HBox(10,tf01,btn04,btn03);
+        hbox02 = new HBox(10, btn01,btn02,btn05,btn06);
+        vbox01 = new VBox(hbox02,hbox01);
         //Tabs
         tab01 = new Tab("Bike list");
         tab01.setClosable(false);
@@ -66,7 +72,7 @@ public class Store extends Application {
         tabPane01 = new TabPane();
         bp01 = new BorderPane();
         bp01.setCenter(tabPane01);
-        bp01.setBottom(hbox01);
+        bp01.setBottom(vbox01);
         tabPane01.getTabs().addAll(tab01,tab02);
 
 
@@ -92,7 +98,11 @@ public class Store extends Application {
     }
 
     private void btn04Buy() {
-        ta02.appendText(tf01.getText()+"\n");
+
+        int index = Integer.parseInt(tf01.getText());
+        Bike selectedBike = file.getCatalog().get(index);
+        Sale sale = new Sale(1,selectedBike);
+        ta02.appendText(sale.toString());
         tf01.clear();
     }
 

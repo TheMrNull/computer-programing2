@@ -22,6 +22,10 @@ public class ReadFile {
 
     List<Bike> catalog;
 
+    public List<Bike> getCatalog(){
+        return catalog;
+    }
+
     public ReadFile(String s){
         catalog = new ArrayList<Bike>();
         try {

@@ -2,6 +2,7 @@ package GUI;
 
 import data.Bike;
 import javafx.application.Application;
+import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
@@ -29,14 +30,24 @@ public class Store extends Application {
     VBox vbox01;
     Tab tab01, tab02;
     TextArea ta01,ta02;
-    TextField tf01;
+    TextField tf01, tf02;
     Stage mainStage;
+    Label lab01, lab02;
+
+
     @Override
     public void start(Stage primaryStage) {
         mainStage = primaryStage;
 
         // Text fields
         tf01 = new TextField();
+        tf02 = new TextField();
+
+        //Labels
+        lab01 = new Label("ID:");
+        lab01.setPadding(new Insets(5));
+        lab02 = new Label("# of items to buy:");
+        lab02.setPadding(new Insets(5));
 
         //Text areas
         ta01 = new TextArea();
@@ -58,7 +69,8 @@ public class Store extends Application {
         btn06 = new Button("Sort wheel size");
         btn06.setOnAction(e->btn06sortWheelSize());
         //Boxes
-        hbox01 = new HBox(10,tf01,btn04,btn03);
+        hbox01 = new HBox(10,lab01,tf01,lab02, tf02,btn04,btn03);
+        hbox01.setPadding(new Insets(10));
         hbox02 = new HBox(10, btn01,btn02,btn05,btn06);
         vbox01 = new VBox(hbox02,hbox01);
         //Tabs
@@ -99,11 +111,25 @@ public class Store extends Application {
 
     private void btn04Buy() {
 
-        int index = Integer.parseInt(tf01.getText());
-        Bike selectedBike = file.getCatalog().get(index);
-        Sale sale = new Sale(1,selectedBike);
-        ta02.appendText(sale.toString());
-        tf01.clear();
+        try {
+            int index = Integer.parseInt(tf01.getText());
+            int nb = Integer.parseInt(tf02.getText());
+            Bike selectedBike = file.getCatalog().get(index);
+            Sale sale = new Sale(nb, selectedBike);
+            ta02.appendText(sale.toString());
+            tf01.clear();
+            tf02.clear();
+
+            Alert invoice = new Alert(Alert.AlertType.INFORMATION);
+            invoice.setTitle("Invoice");
+            invoice.setContentText(sale.toString());
+            invoice.showAndWait();
+        }
+        catch(Exception error){
+            Alert e = new Alert(Alert.AlertType.ERROR);
+            e.setTitle("Error");
+            e.setContentText("There was an error with this id");
+        }
     }
 
     private void btn03Exit() {

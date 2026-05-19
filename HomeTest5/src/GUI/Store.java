@@ -129,6 +129,7 @@ public class Store extends Application {
             Alert e = new Alert(Alert.AlertType.ERROR);
             e.setTitle("Error");
             e.setContentText("There was an error with this id");
+            e.showAndWait();
         }
     }
 
